@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/01/31 18:07:00 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:21:13 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	if (parser(argc, argv))
+	t_philosopher	*philosophers;
+
+	if (parser(argc, argv, philosophers))
 		return (0);
 	return (0);
 }

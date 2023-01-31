@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/01/31 18:17:52 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:42:40 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,17 @@ typedef struct s_philosopher
 	int			number_time_eat;
 	int			max_times_eat;
 }	t_philosopher;
+
+// Parser
+
+// Util Functions
+
+/**
+ * @brief Receives a string and returns it in a form of int
+ * 
+ * @param str char *
+ * @return int 
+ */
+int	ft_atoi(char *str);
 
 #endif
