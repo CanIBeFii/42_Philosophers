@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/01/31 18:42:40 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:16:16 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,12 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-// Types
+// Defines
 
-/**
- * @brief Fork for the philosophers to eat.
- * 
- * @param fork_number int
- * @param mutex pthread_mutex_t
- */
-typedef struct s_fork
-{
-	int			fork_number;
-	pthread_mutex_t		mutex;
-}	t_fork;
+# define FAILURE 0
+# define SUCCESS 1
+
+// Types
 
 /**
  * @brief Philosopher type as all the information for them to life.
@@ -58,6 +51,31 @@ typedef struct s_philosopher
 
 // Parser
 
+/**
+ * @brief 
+ * 
+ * @param ac 
+ * @param av 
+ * @param phil 
+ * @param fork 
+ * @return int 
+ */
+int		parser(int ac, char **av, t_philosopher **phil, pthread_mutex_t **fork);
+
+/**
+ * @brief Initializes all the philosophers with their information about:
+ * - philosopher number\n
+ * - time to die\n
+ * - time to eat\n
+ * - time to sleep\n
+ * - maximum time to eat
+ * 
+ * @param philo t_philosopher **
+ * @param argv char **
+ * @param argc int
+ */
+void	init_philos(t_philosopher **philo, char **argv, int argc);
+
 // Util Functions
 
 /**
@@ -66,6 +84,6 @@ typedef struct s_philosopher
  * @param str char *
  * @return int 
  */
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
 
 #endif
