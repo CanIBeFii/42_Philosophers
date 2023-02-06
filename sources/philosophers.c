@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/06 14:38:16 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:42:19 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ int	main(int argc, char **argv)
 		//pthread_create(&philosophers[iter].thread, NULL);
 		iter++;
 	}
+	printf("%lld\n", get_time_of_day());
+	usleep(1000);
+	printf("%lld\n", get_time_of_day());
 	free_philosopher(philosophers, forks, philo_number);
 	return (0);
+}
+
+long long	get_time_of_day(void)
+{
+	static struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000LL) + (time.tv_usec / 1000));
 }

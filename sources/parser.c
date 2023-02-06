@@ -6,13 +6,13 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/06 13:48:34 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:36:42 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	parser(int ac, char **av, t_philo **phil, pthread_mutex_t **fork)
+int	parser(int ac, char **av, t_philo **phi, pthread_mutex_t **fork)
 {
 	int	arg_num;
 
@@ -24,14 +24,14 @@ int	parser(int ac, char **av, t_philo **phil, pthread_mutex_t **fork)
 		return (FAILURE);
 	}
 	arg_num = ft_atoi(av[1]);
-	*phil = malloc(sizeof(t_philo) * arg_num);
-	if (*phil == NULL)
+	*phi = malloc(sizeof(t_philo) * arg_num);
+	if (*phi == NULL)
 		return (FAILURE);
 	*fork = malloc(sizeof(pthread_mutex_t) * arg_num);
 	if (*fork == NULL)
 		return (FAILURE);
 	init_fork(fork, arg_num);
-	init_philos(phil, av, ac);
+	init_philos(phi, av, ac);
 	return (SUCCESS);
 }
 

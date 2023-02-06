@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/06 14:44:08 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:40:34 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,15 @@ typedef struct s_philo
 	pthread_t	thread;
 }	t_philo;
 
+// Philosophers
+
+/**
+ * @brief Gets the current time
+ * 
+ * @return long long int 
+ */
+long long	get_time_of_day(void);
+
 // Parser
 
 /**
@@ -77,7 +86,7 @@ typedef struct s_philo
  * @param fork pthread_mutex_t
  * @return int 
  */
-int		parser(int ac, char **av, t_philo **phil, pthread_mutex_t **fork);
+int			parser(int ac, char **av, t_philo **ph, pthread_mutex_t **fork);
 
 /**
  * @brief Initializes all the mutexs for the forks.
@@ -85,7 +94,7 @@ int		parser(int ac, char **av, t_philo **phil, pthread_mutex_t **fork);
  * @param forks pthread_mutex_t **
  * @param num int
  */
-void	init_fork(pthread_mutex_t **forks, int num);
+void		init_fork(pthread_mutex_t **forks, int num);
 
 /**
  * @brief Initializes all the philosophers with their information about:
@@ -99,7 +108,7 @@ void	init_fork(pthread_mutex_t **forks, int num);
  * @param argv char **
  * @param argc int
  */
-void	init_philos(t_philo **philo, char **argv, int argc);
+void		init_philos(t_philo **philo, char **argv, int argc);
 
 // Util Functions
 
@@ -109,7 +118,7 @@ void	init_philos(t_philo **philo, char **argv, int argc);
  * @param str char *
  * @return int 
  */
-int		ft_atoi(char *str);
+int			ft_atoi(char *str);
 
 // Free
 
@@ -121,7 +130,7 @@ int		ft_atoi(char *str);
  * @param num int
  * @return int 
  */
-int		free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
+int			free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
 
 // Print Message
 
@@ -133,6 +142,6 @@ int		free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
  * @param time 
  * @param philo_number 
  */
-void	print_message(int message_type, long long int time, int philo_number);
+void		print_message(int message_type, long long int time, int philo_number);
 
 #endif
