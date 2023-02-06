@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/01 14:16:16 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:44:08 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,22 @@
 # define FAILURE 0
 # define SUCCESS 1
 
+// Define Codes
+
+# define FORK_CODE 1
+# define EAT_CODE 2
+# define SLEEP_CODE 3
+# define THINK_CODE 4
+# define DIED_CODE 5
+
+// Define Messages
+
+# define FORK_MESSAGE "has taken a fork\n"
+# define EAT_MESSAGE "is eating\n"
+# define SLEEP_MESSAGE "is sleeping\n"
+# define THINK_MESSAGE "is thinking\n"
+# define DIED_MESSAGE "died\n"
+
 // Types
 
 /**
@@ -39,7 +55,7 @@
  * @param number_time_eat int
  * @param max_times_eat int
  */
-typedef struct s_philosopher
+typedef struct s_philo
 {
 	int			philo_number;
 	int			time_to_die;
@@ -47,20 +63,29 @@ typedef struct s_philosopher
 	int			time_to_sleep;
 	int			number_time_eat;
 	int			max_times_eat;
-}	t_philosopher;
+	pthread_t	thread;
+}	t_philo;
 
 // Parser
 
 /**
- * @brief 
+ * @brief Parses 
  * 
- * @param ac 
- * @param av 
- * @param phil 
- * @param fork 
+ * @param ac int
+ * @param av char **
+ * @param phil t_philo
+ * @param fork pthread_mutex_t
  * @return int 
  */
-int		parser(int ac, char **av, t_philosopher **phil, pthread_mutex_t **fork);
+int		parser(int ac, char **av, t_philo **phil, pthread_mutex_t **fork);
+
+/**
+ * @brief Initializes all the mutexs for the forks.
+ * 
+ * @param forks pthread_mutex_t **
+ * @param num int
+ */
+void	init_fork(pthread_mutex_t **forks, int num);
 
 /**
  * @brief Initializes all the philosophers with their information about:
@@ -74,7 +99,7 @@ int		parser(int ac, char **av, t_philosopher **phil, pthread_mutex_t **fork);
  * @param argv char **
  * @param argc int
  */
-void	init_philos(t_philosopher **philo, char **argv, int argc);
+void	init_philos(t_philo **philo, char **argv, int argc);
 
 // Util Functions
 
@@ -85,5 +110,29 @@ void	init_philos(t_philosopher **philo, char **argv, int argc);
  * @return int 
  */
 int		ft_atoi(char *str);
+
+// Free
+
+/**
+ * @brief Frees all the allocated memory of the philosophers
+ * 
+ * @param philo t_philo *
+ * @param fork pthread_mutex_t *
+ * @param num int
+ * @return int 
+ */
+int		free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
+
+// Print Message
+
+/**
+ * @brief Prints a message with the form: 
+ * ['time'] 'philo_number' 'message_type'
+ * 
+ * @param message_type 
+ * @param time 
+ * @param philo_number 
+ */
+void	print_message(int message_type, long long int time, int philo_number);
 
 #endif
