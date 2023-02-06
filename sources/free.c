@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/06 14:38:16 by fialexan         ###   ########.fr       */
+/*   Created: 2023/02/06 12:35:44 by fialexan          #+#    #+#             */
+/*   Updated: 2023/02/06 13:56:11 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num)
 {
-	t_philo			*philosophers;
-	pthread_mutex_t	*forks;
-	int				philo_number;
-	int				iter;
+	int	iter;
 
-	if (parser(argc, argv, &philosophers, &forks) == FAILURE)
-		return (0);
-	philo_number = ft_atoi(argv[1]);
 	iter = 0;
-	while (iter < philo_number)
+	while (iter < num)
 	{
-		//pthread_create(&philosophers[iter].thread, NULL);
+		free(&philo[iter]);
+		free(&fork[iter]);
 		iter++;
 	}
-	free_philosopher(philosophers, forks, philo_number);
-	return (0);
+	return (1);
 }
