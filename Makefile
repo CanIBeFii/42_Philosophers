@@ -4,7 +4,7 @@ HEADERS_LIST = philosophers.h
 HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
-SOURCES_LIST = philosophers.c parser.c util_functions.c free.c print_message.c
+SOURCES_LIST = philosophers.c parser.c util_functions.c free.c print_message.c dinner.c
 SOURCES_DIRECTORY = ./sources/
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
