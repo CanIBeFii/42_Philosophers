@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 13:58:22 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:11:04 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int	main(int argc, char **argv)
 		return (0);
 	philo_number = ft_atoi(argv[1]);
 	iter = 0;
+	table.philo_num = philo_number;
 	while (iter < philo_number)
 	{
-		philo[iter].thread_num = pthread_create(&philo[iter].thread,
-				NULL, &dinner, );
+		table.philo[iter].thread_num = pthread_create(&table.philo[iter].thread,
+				NULL, &dinner, &table);
 		iter++;
 	}
 	iter = 0;
 	while (iter < philo_number)
 	{
-		pthread_join(philo[iter].thread_num, 0);
+		pthread_join(table.philo[iter].thread_num, 0);
 		iter++;
 	}
-	free_philosopher(philo, forks, philo_number);
+	free_philosopher(table.philo, table.forks, philo_number);
 	return (0);
 }
 

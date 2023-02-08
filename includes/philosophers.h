@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 13:58:48 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:58:11 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@
 
 // Types
 
-typedef struct s_table
-{
-	t_philo			*philo;
-	pthread_mutex_t	*forks;
-}	t_table;
-
 /**
  * @brief Philosopher type as all the information for them to life.
  * 
@@ -75,6 +69,20 @@ typedef struct s_philo
 	long long	last_time_ate;
 	pthread_t	thread;
 }	t_philo;
+
+/**
+ * @brief Table with all the philosophers the forks and the number
+ *  of philosophers.
+ *
+ * @param philo t_philo *
+ * @param forks pthread_mutex_t * 
+ */
+typedef struct s_table
+{
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
+	int				philo_num;
+}	t_table;
 
 // Philosophers
 
@@ -152,5 +160,9 @@ int			free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
  * @param philo_number 
  */
 void		print_message(int message_type, long long time, int philo_num);
+
+// Dinner
+
+
 
 #endif
