@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 12:37:27 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:58:48 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,10 @@ long long	get_time_of_day(void);
  * 
  * @param ac int
  * @param av char **
- * @param phil t_philo
- * @param fork pthread_mutex_t
+ * @param table t_table *
  * @return int 
  */
-int			parser(int ac, char **av, t_philo **ph, pthread_mutex_t **fork);
+int			parser(int ac, char **av, t_table *table);
 
 /**
  * @brief Initializes all the mutexs for the forks.

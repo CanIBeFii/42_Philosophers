@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 12:33:58 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:58:22 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo			*philo;
-	pthread_mutex_t	*forks;
-	int				philo_number;
-	int				iter;
+	t_table	table;
+	int		philo_number;
+	int		iter;
 
-	if (parser(argc, argv, &philo, &forks) == FAILURE)
+	if (parser(argc, argv, &table) == FAILURE)
 		return (0);
 	philo_number = ft_atoi(argv[1]);
 	iter = 0;
