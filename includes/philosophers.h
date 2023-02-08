@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/06 16:40:34 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:30:15 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,25 @@
 /**
  * @brief Philosopher type as all the information for them to life.
  * 
- * @param philo_number int
+ * @param thread
+ * @param philo_num int
  * @param time_to_die int
  * @param time_to_eat int
  * @param time_to_sleep int
  * @param number_time_eat int
+ * @param last_time_ate long long
  * @param max_times_eat int
  */
 typedef struct s_philo
 {
-	int			philo_number;
+	int			thread_num;
+	int			philo_num;
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			number_time_eat;
 	int			max_times_eat;
+	long long	last_time_ate;
 	pthread_t	thread;
 }	t_philo;
 
@@ -142,6 +146,6 @@ int			free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
  * @param time 
  * @param philo_number 
  */
-void		print_message(int message_type, long long int time, int philo_number);
+void		print_message(int message_type, long long time, int philo_num);
 
 #endif
