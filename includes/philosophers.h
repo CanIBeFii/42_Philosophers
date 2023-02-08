@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 12:30:15 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:37:27 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@
 # define DIED_MESSAGE "died\n"
 
 // Types
+
+typedef struct s_table
+{
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
+}	t_table;
 
 /**
  * @brief Philosopher type as all the information for them to life.

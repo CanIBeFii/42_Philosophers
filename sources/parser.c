@@ -6,15 +6,17 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/06 16:36:42 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:06:27 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	parser(int ac, char **av, t_philo **phi, pthread_mutex_t **fork)
+int	parser(int ac, char **av, t_table *table)
 {
-	int	arg_num;
+	int				arg_num;
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
 
 	if (ac != 5 && ac != 6)
 	{
@@ -24,14 +26,16 @@ int	parser(int ac, char **av, t_philo **phi, pthread_mutex_t **fork)
 		return (FAILURE);
 	}
 	arg_num = ft_atoi(av[1]);
-	*phi = malloc(sizeof(t_philo) * arg_num);
-	if (*phi == NULL)
+	philo = malloc(sizeof(t_philo) * arg_num);
+	if (philo == NULL)
 		return (FAILURE);
-	*fork = malloc(sizeof(pthread_mutex_t) * arg_num);
-	if (*fork == NULL)
+	forks = malloc(sizeof(pthread_mutex_t) * arg_num);
+	if (forks == NULL)
 		return (FAILURE);
-	init_fork(fork, arg_num);
-	init_philos(phi, av, ac);
+	init_fork(&forks, arg_num);
+	init_philos(&philo, av, ac);
+	table.philo = philo;
+	table.forks = forks;
 	return (SUCCESS);
 }
 
@@ -51,6 +55,8 @@ void	init_philos(t_philo **philo, char **argv, int argc)
 		philosopher[iter].time_to_eat = ft_atoi(argv[3]);
 		philosopher[iter].time_to_sleep = ft_atoi(argv[4]);
 		philosopher[iter].number_time_eat = 0;
+		philosopher[iter].last_time_ate = 0;
+		philosopher[iter].thread_num = 0;
 		if (argc == 6)
 			philosopher[iter].max_times_eat = ft_atoi(argv[5]);
 		else
