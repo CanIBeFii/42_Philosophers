@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/10 11:57:29 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:59:21 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parser(int ac, char **av, t_table *table)
 {
-	int				arg_num;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 
@@ -25,18 +24,17 @@ int	parser(int ac, char **av, t_table *table)
 		printf("[number_of_times_each_philosopher_must_eat]\n");
 		return (FAILURE);
 	}
-	arg_num = ft_atoi(av[1]);
-	philo = malloc(sizeof(t_philo) * arg_num);
+	table->philo_num = ft_atoi(av[1]);
+	philo = malloc(sizeof(t_philo) * table->philo_num);
 	if (philo == NULL)
 		return (FAILURE);
-	forks = malloc(sizeof(pthread_mutex_t) * arg_num);
+	forks = malloc(sizeof(pthread_mutex_t) * table->philo_num);
 	if (forks == NULL)
 		return (FAILURE);
-	init_fork(&forks, arg_num);
+	init_fork(&forks, table->philo_num);
 	init_philos(&philo, av, ac);
 	table->philo = philo;
 	table->forks = forks;
-	table->philo_num = arg_num;
 	attribute_forks(table);
 	return (SUCCESS);
 }
