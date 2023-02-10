@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 13:06:27 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:57:29 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,30 @@ int	parser(int ac, char **av, t_table *table)
 		return (FAILURE);
 	init_fork(&forks, arg_num);
 	init_philos(&philo, av, ac);
-	table.philo = philo;
-	table.forks = forks;
+	table->philo = philo;
+	table->forks = forks;
+	table->philo_num = arg_num;
+	attribute_forks(table);
 	return (SUCCESS);
+}
+
+void	attribute_forks(t_table *table)
+{
+	int	iter;
+
+	iter = 0;
+	while (iter < table->philo_num)
+	{
+		if (iter == 0)
+			table->philo[iter].left_fork = &table->forks[table->philo_num - 1];
+		else
+			table->philo[iter].left_fork = &table->forks[iter];
+		if (iter == table->philo_num - 1)
+			table->philo[iter].right_fork = &table->forks[0];
+		else
+			table->philo[iter].left_fork = &table->forks[iter + 1];
+		iter++;
+	}
 }
 
 void	init_philos(t_philo **philo, char **argv, int argc)
@@ -50,7 +71,7 @@ void	init_philos(t_philo **philo, char **argv, int argc)
 	philosopher = *philo;
 	while (iter < philo_number)
 	{
-		philosopher[iter].philo_number = iter;
+		philosopher[iter].philo_num = iter;
 		philosopher[iter].time_to_die = ft_atoi(argv[2]);
 		philosopher[iter].time_to_eat = ft_atoi(argv[3]);
 		philosopher[iter].time_to_sleep = ft_atoi(argv[4]);
