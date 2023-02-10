@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 14:58:11 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:19:49 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,17 @@
  */
 typedef struct s_philo
 {
-	int			thread_num;
-	int			philo_num;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			number_time_eat;
-	int			max_times_eat;
-	long long	last_time_ate;
-	pthread_t	thread;
+	int				thread_num;
+	int				philo_num;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_time_eat;
+	int				max_times_eat;
+	long long		last_time_ate;
+	pthread_t		thread;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 }	t_philo;
 
 /**
@@ -106,6 +108,13 @@ long long	get_time_of_day(void);
 int			parser(int ac, char **av, t_table *table);
 
 /**
+ * @brief Attributes a left and right fork to each philosopher
+ * 
+ * @param table t_table *
+ */
+void		attribute_forks(t_table *table);
+
+/**
  * @brief Initializes all the mutexs for the forks.
  * 
  * @param forks pthread_mutex_t **
@@ -142,12 +151,11 @@ int			ft_atoi(char *str);
 /**
  * @brief Frees all the allocated memory of the philosophers
  * 
- * @param philo t_philo *
- * @param fork pthread_mutex_t *
+ * @param table t_table *
  * @param num int
  * @return int 
  */
-int			free_philosopher(t_philo *philo, pthread_mutex_t *fork, int num);
+int			free_philosopher(t_table *table, int num);
 
 // Print Message
 
@@ -163,6 +171,6 @@ void		print_message(int message_type, long long time, int philo_num);
 
 // Dinner
 
-
+void		*dinner(void *args);
 
 #endif
