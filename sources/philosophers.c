@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/08 15:11:04 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:20:18 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	while (iter < philo_number)
 	{
 		table.philo[iter].thread_num = pthread_create(&table.philo[iter].thread,
-				NULL, &dinner, &table);
+				NULL, &dinner, &table.philo[iter]);
 		iter++;
 	}
 	iter = 0;
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		pthread_join(table.philo[iter].thread_num, 0);
 		iter++;
 	}
-	free_philosopher(table.philo, table.forks, philo_number);
+	free_philosopher(&table, philo_number);
 	return (0);
 }
 
