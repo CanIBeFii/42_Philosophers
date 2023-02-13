@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:35:44 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/13 16:54:27 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:18:32 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,39 @@
 
 int	free_philosopher(t_table *table, int num)
 {
-	int	iter;
-
 	usleep(1000);
 	if (table != NULL)
 	{
 		if (table->forks != NULL)
-		{
-			iter = 0;
-			while (iter < num)
-			{
-				pthread_mutex_destroy(table->forks + iter);
-				iter++;
-			}
-			free(table->forks);
-		}
+			free_forks(table->forks, num);
 		if (table->philo != NULL)
-		{
-			iter = 0;
-			while (iter < num)
-			{
-				pthread_mutex_destroy(table->philo[iter].message);
-				iter++;
-			}
-			free(table->philo);
-		}
+			free_philos(table->philo, num);
 	}
 	return (1);
+}
+
+void	free_forks(pthread_mutex_t *forks, int num)
+{
+	int	iter;
+
+	iter = 0;
+	while (iter < num)
+	{
+		pthread_mutex_destroy(forks + iter);
+		iter++;
+	}
+	free(forks);
+}
+
+void	free_philos(t_philo *philo, int num)
+{
+	int	iter;
+
+	iter = 0;
+	while (iter < num)
+	{
+		pthread_mutex_destroy(philo[iter].message);
+		iter++;
+	}
+	free(philo);
 }

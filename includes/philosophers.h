@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/13 16:52:36 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:18:13 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,22 @@ int			ft_atoi(char *str);
  * @return int 
  */
 int			free_philosopher(t_table *table, int num);
+
+/**
+ * @brief Destroys the mutexes and frees the forks.
+ * 
+ * @param forks pthread_mutex_t *
+ * @param num int
+ */
+void		free_forks(pthread_mutex_t *forks, int num);
+
+/**
+ * @brief Destroys all the mutexes and frees the philosophers.
+ * 
+ * @param philo t_philo *
+ * @param num int
+ */
+void		free_philos(t_philo *philo, int num);
 
 // Print Message
 
