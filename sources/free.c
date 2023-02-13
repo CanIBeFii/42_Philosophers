@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:35:44 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/10 16:03:43 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:54:27 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,15 @@ int	free_philosopher(t_table *table, int num)
 			free(table->forks);
 		}
 		if (table->philo != NULL)
+		{
+			iter = 0;
+			while (iter < num)
+			{
+				pthread_mutex_destroy(table->philo[iter].message);
+				iter++;
+			}
 			free(table->philo);
+		}
 	}
 	return (1);
 }
