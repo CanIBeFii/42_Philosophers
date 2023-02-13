@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/10 15:59:21 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:40:30 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	init_philos(t_philo **philo, char **argv, int argc)
 		philosopher[iter].number_time_eat = 0;
 		philosopher[iter].last_time_ate = 0;
 		philosopher[iter].thread_num = 0;
+		philosopher[iter].is_dead = 0;
 		if (argc == 6)
 			philosopher[iter].max_times_eat = ft_atoi(argv[5]);
 		else
