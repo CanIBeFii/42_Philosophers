@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/13 15:30:04 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:52:36 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ typedef struct s_philo
 {
 	int				thread_num;
 	int				philo_num;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	long long		time_to_die;
+	long long		time_to_eat;
+	long long		time_to_sleep;
 	int				number_time_eat;
 	int				max_times_eat;
 	int				is_dead;
@@ -76,6 +76,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*message;
 }	t_philo;
 
 /**
@@ -97,9 +98,17 @@ typedef struct s_table
 /**
  * @brief Gets the current time
  * 
- * @return long long int 
+ * @return long long
  */
 long long	get_time_of_day(void);
+
+/**
+ * @brief Get the time difference between the current time and the time given.
+ * 
+ * @param time long long
+ * @return long long 
+ */
+long long	get_time_diff(long long time);
 
 // Parser
 
@@ -127,6 +136,13 @@ void		attribute_forks(t_table *table);
  * @param num int
  */
 void		init_fork(pthread_mutex_t **forks, int num);
+
+/**
+ * @brief Initializes all the mutexes in thhe philosopher.
+ * 
+ * @param philo t_philo *
+ */
+void		init_mutex(t_philo *philo);
 
 /**
  * @brief Initializes all the philosophers with their information about:
