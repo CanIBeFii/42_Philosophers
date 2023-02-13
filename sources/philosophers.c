@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:24:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/10 16:05:11 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:41:55 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,9 @@ long long	get_time_of_day(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000LL) + (time.tv_usec / 1000));
+}
+
+long long	get_time_diff(long long time)
+{
+	return (get_time_of_day() - time);
 }
