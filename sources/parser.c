@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/13 16:51:39 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:36:34 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int	parser(int ac, char **av, t_table *table)
 	forks = malloc(sizeof(pthread_mutex_t) * table->philo_num);
 	if (forks == NULL)
 		return (FAILURE);
+	pthread_mutex_init(&table->message, NULL);
 	init_fork(&forks, table->philo_num);
-	init_philos(&philo, av, ac);
+	init_philos(&philo, av, ac, &table->message);
 	table->philo = philo;
 	table->forks = forks;
 	attribute_forks(table);
@@ -54,7 +55,7 @@ void	attribute_forks(t_table *table)
 	table->philo[iter].right_fork = &table->forks[0];
 }
 
-void	init_philos(t_philo **philo, char **argv, int argc)
+void	init_philos(t_philo **p, char **argv, int argc, pthread_mutex_t *m)
 {
 	int			philo_number;
 	int			iter;
@@ -62,7 +63,7 @@ void	init_philos(t_philo **philo, char **argv, int argc)
 
 	philo_number = ft_atoi(argv[1]);
 	iter = 0;
-	philosopher = *philo;
+	philosopher = *p;
 	while (iter < philo_number)
 	{
 		philosopher[iter].philo_num = iter;
@@ -73,21 +74,13 @@ void	init_philos(t_philo **philo, char **argv, int argc)
 		philosopher[iter].last_time_ate = 0;
 		philosopher[iter].thread_num = 0;
 		philosopher[iter].is_dead = 0;
-		init_mutex(&philosopher[iter]);
+		philosopher[iter].message = m;
 		if (argc == 6)
 			philosopher[iter].max_times_eat = ft_atoi(argv[5]);
 		else
 			philosopher[iter].max_times_eat = -1;
 		iter++;
 	}
-}
-
-void	init_mutex(t_philo *philo)
-{
-	philo->message = malloc(sizeof(pthread_mutex_t));
-	if (philo->message == NULL)
-		return ;
-	pthread_mutex_init(philo->message, NULL);
 }
 
 void	init_fork(pthread_mutex_t **forks, int num)

@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/13 18:18:13 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:37:17 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	message;
 	int				philo_num;
 }	t_table;
 
@@ -137,12 +138,6 @@ void		attribute_forks(t_table *table);
  */
 void		init_fork(pthread_mutex_t **forks, int num);
 
-/**
- * @brief Initializes all the mutexes in thhe philosopher.
- * 
- * @param philo t_philo *
- */
-void		init_mutex(t_philo *philo);
 
 /**
  * @brief Initializes all the philosophers with their information about:
@@ -156,7 +151,7 @@ void		init_mutex(t_philo *philo);
  * @param argv char **
  * @param argc int
  */
-void		init_philos(t_philo **philo, char **argv, int argc);
+void		init_philos(t_philo **p, char **argv, int argc, pthread_mutex_t *m);
 
 // Util Functions
 
@@ -165,6 +160,7 @@ void		init_philos(t_philo **philo, char **argv, int argc);
  * 
  * @param str char *
  * @return int 
+
  */
 int			ft_atoi(char *str);
 
