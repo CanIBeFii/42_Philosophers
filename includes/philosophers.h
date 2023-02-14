@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/14 12:37:17 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:03:14 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,15 @@ long long	get_time_of_day(void);
  */
 long long	get_time_diff(long long time);
 
+/**
+ * @brief Calls function for the philosophers eat, sleep  and think 
+ * and verifies that they don't die.
+ * 
+ * @param args void *
+ * @return void* 
+ */
+void		*dinner(void *args);
+
 // Parser
 
 /**
@@ -204,15 +213,6 @@ void		free_philos(t_philo *philo, int num);
 void		print_message(int message_type, long long time, int philo_num);
 
 // Dinner
-
-/**
- * @brief Calls function for the philosophers eat, sleep  and think 
- * and verifies that they don't die.
- * 
- * @param args void *
- * @return void* 
- */
-void		*dinner(void *args);
 
 /**
  * @brief Receives a philosophers and makes it think.
