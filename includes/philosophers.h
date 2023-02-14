@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/14 13:03:14 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:21:14 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,12 +229,19 @@ void		think_philo(t_philo *philo);
 void		sleep_philo(t_philo *philo);
 
 /**
- * @brief Receives a philosopher, locks the left and right fork, makes it eat
+ * @brief Receives a philosopher makes it eat
  * for a set of time, them unlocks both forks.
  * 
  * @param philo t_philo *
  */
 void		eat_philo(t_philo *philo);
+
+/**
+ * @brief Receives a philosopher, locks the left and right fork.
+ * 
+ * @param philo 
+ */
+void		take_forks(t_philo *philo);
 
 /**
  * @brief Receives a philosopher and the function that called it, if it was
