@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:35:44 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/13 18:18:32 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:27:00 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	free_philosopher(t_table *table, int num)
 	usleep(1000);
 	if (table != NULL)
 	{
+		pthread_mutex_destroy(&table->message);
 		if (table->forks != NULL)
 			free_forks(table->forks, num);
 		if (table->philo != NULL)
@@ -45,7 +46,6 @@ void	free_philos(t_philo *philo, int num)
 	iter = 0;
 	while (iter < num)
 	{
-		pthread_mutex_destroy(philo[iter].message);
 		iter++;
 	}
 	free(philo);

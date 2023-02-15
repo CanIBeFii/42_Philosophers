@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:10:09 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/14 13:21:14 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:12:39 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@
  */
 typedef struct s_philo
 {
+	int				max_philo;
 	int				thread_num;
-	int				philo_num;
-	long long		time_to_die;
-	long long		time_to_eat;
-	long long		time_to_sleep;
+	int				philo_id;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				number_time_eat;
 	int				max_times_eat;
 	int				is_dead;

@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/14 12:36:34 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:23:29 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,15 @@ void	init_philos(t_philo **p, char **argv, int argc, pthread_mutex_t *m)
 	philosopher = *p;
 	while (iter < philo_number)
 	{
-		philosopher[iter].philo_num = iter;
-		philosopher[iter].time_to_die = 1000 * ft_atoi(argv[2]);
-		philosopher[iter].time_to_eat = 1000 * ft_atoi(argv[3]);
-		philosopher[iter].time_to_sleep = 1000 * ft_atoi(argv[4]);
+		philosopher[iter].philo_id = iter;
+		philosopher[iter].time_to_die = ft_atoi(argv[2]);
+		philosopher[iter].time_to_eat = ft_atoi(argv[3]);
+		philosopher[iter].time_to_sleep = ft_atoi(argv[4]);
 		philosopher[iter].number_time_eat = 0;
 		philosopher[iter].last_time_ate = 0;
 		philosopher[iter].thread_num = 0;
 		philosopher[iter].is_dead = 0;
+		philosopher[iter].max_philo = philo_number;
 		philosopher[iter].message = m;
 		if (argc == 6)
 			philosopher[iter].max_times_eat = ft_atoi(argv[5]);
