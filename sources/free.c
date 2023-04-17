@@ -5,48 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 12:35:44 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/14 13:27:00 by fialexan         ###   ########.fr       */
+/*   Created: 2023/04/17 19:12:05 by fialexan          #+#    #+#             */
+/*   Updated: 2023/04/17 19:25:11 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	free_philosopher(t_table *table, int num)
+void	free_info(t_info *info)
 {
-	usleep(1000);
-	if (table != NULL)
+	if (info != NULL)
 	{
-		pthread_mutex_destroy(&table->message);
-		if (table->forks != NULL)
-			free_forks(table->forks, num);
-		if (table->philo != NULL)
-			free_philos(table->philo, num);
+		if (info->forks != NULL)
+		{
+			pthread_mutex_destroy(info->forks);
+			free(info->forks);
+		}
+		if (info->message != NULL)
+		{
+			pthread_mutex_destroy(info->message);
+			free(info->message);
+		}
+		if (info->death != NULL)
+		{
+			pthread_mutex_destroy(info->death);
+			free(info->death);
+		}
+		free(info);
 	}
-	return (1);
-}
-
-void	free_forks(pthread_mutex_t *forks, int num)
-{
-	int	iter;
-
-	iter = 0;
-	while (iter < num)
-	{
-		pthread_mutex_destroy(forks + iter);
-		iter++;
-	}
-	free(forks);
-}
-
-void	free_philos(t_philo *philo, int num)
-{
-	int	iter;
-
-	iter = 0;
-	while (iter < num)
-	{
-		iter++;
-	}
-	free(philo);
 }

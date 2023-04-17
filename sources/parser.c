@@ -5,95 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 17:13:31 by fialexan          #+#    #+#             */
-/*   Updated: 2023/02/15 11:23:29 by fialexan         ###   ########.fr       */
+/*   Created: 2023/04/17 17:38:18 by fialexan          #+#    #+#             */
+/*   Updated: 2023/04/17 19:11:56 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	parser(int ac, char **av, t_table *table)
+int	parse_input(int argc, char **argv)
 {
-	t_philo			*philo;
-	pthread_mutex_t	*forks;
+	t_info	*info;
 
-	if (ac != 5 && ac != 6)
-	{
-		printf("Error!\nUsage ./philosophers number_of_philosophers ");
-		printf("time_to_die time_to_eat time_to_sleep ");
-		printf("[number_of_times_each_philosopher_must_eat]\n");
-		return (FAILURE);
-	}
-	table->philo_num = ft_atoi(av[1]);
-	philo = malloc(sizeof(t_philo) * table->philo_num);
-	if (philo == NULL)
-		return (FAILURE);
-	forks = malloc(sizeof(pthread_mutex_t) * table->philo_num);
-	if (forks == NULL)
-		return (FAILURE);
-	pthread_mutex_init(&table->message, NULL);
-	init_fork(&forks, table->philo_num);
-	init_philos(&philo, av, ac, &table->message);
-	table->philo = philo;
-	table->forks = forks;
-	attribute_forks(table);
-	return (SUCCESS);
+	if (argc < 5 || argc > 6)
+		return (handle_error(WRONG_NUM_ARGS, -1));
+	info = init_info(argc, argv);
+	if (info == NULL)
+		return (handle_error(WRONG_ARGS, -1));
+	
+	return (0);
 }
 
-void	attribute_forks(t_table *table)
+t_info	*init_info(int argc, char **argv)
+{
+	t_info	*info;
+
+	info = malloc(sizeof(t_info));
+	if (info == NULL)
+		return (NULL);
+	info->total_philos = ft_atoi(argv[1], 0);
+	info->time_to_die = ft_atoi(argv[2], 0);
+	info->time_to_eat = ft_atoi(argv[3], 0);
+	info->time_to_sleep = ft_atoi(argv[4], 0);
+	if (argc == 6)
+		info->max_number_of_meals = ft_atoi(argv[5], 0);
+	else
+		info->max_number_of_meals = -2;
+	if (info->total_philos < 1 || info->time_to_die < 1 || info->time_to_eat < 1
+		|| info->time_to_sleep < 1 || info->max_number_of_meals < -1)
+	{
+		free(info);
+		return (NULL);
+	}
+	
+	return (info);
+}
+
+t
+int	ft_atoi(char *str, int i)
+{
+	int	number;
+	int	signal;
+
+	signal = 1;
+	number = 0;
+	if (check_is_number(str) == 0)
+		return (-1);
+	while (str[i] != '\0' && (str[i] == ' ' || (str[i] > 8 && str[i] < 14)))
+		i++;
+	while (str[i] != '\0' && (str[i] == '+' || str[i] == '-'))
+	{
+		if (str[i + 1] == '-' || str[i + 1] == '+')
+			return (0);
+		if (str[i] == '-')
+			signal *= -1;
+		i++;
+	}
+	while (48 <= str[i] && str[i] <= 57)
+	{
+		number *= 10;
+		number += str[i] - '0';
+		i++;
+	}
+	return (signal * number);
+}
+
+int	check_is_number(char *str)
 {
 	int	iter;
 
 	iter = 0;
-	while (iter < table->philo_num - 1)
+	if (str[iter] == '-')
+		iter++;
+	while (str[iter] != '\0')
 	{
-		table->philo[iter].left_fork = &table->forks[iter];
-		table->philo[iter].right_fork = &table->forks[iter + 1];
+		if ('9' < str[iter] || str[iter] < '0')
+			return (0);
 		iter++;
 	}
-	table->philo[iter].left_fork = &table->forks[iter];
-	table->philo[iter].right_fork = &table->forks[0];
-}
-
-void	init_philos(t_philo **p, char **argv, int argc, pthread_mutex_t *m)
-{
-	int			philo_number;
-	int			iter;
-	t_philo		*philosopher;
-
-	philo_number = ft_atoi(argv[1]);
-	iter = 0;
-	philosopher = *p;
-	while (iter < philo_number)
-	{
-		philosopher[iter].philo_id = iter;
-		philosopher[iter].time_to_die = ft_atoi(argv[2]);
-		philosopher[iter].time_to_eat = ft_atoi(argv[3]);
-		philosopher[iter].time_to_sleep = ft_atoi(argv[4]);
-		philosopher[iter].number_time_eat = 0;
-		philosopher[iter].last_time_ate = 0;
-		philosopher[iter].thread_num = 0;
-		philosopher[iter].is_dead = 0;
-		philosopher[iter].max_philo = philo_number;
-		philosopher[iter].message = m;
-		if (argc == 6)
-			philosopher[iter].max_times_eat = ft_atoi(argv[5]);
-		else
-			philosopher[iter].max_times_eat = -1;
-		iter++;
-	}
-}
-
-void	init_fork(pthread_mutex_t **forks, int num)
-{
-	int				iter;
-	pthread_mutex_t	*fork;
-
-	fork = *forks;
-	iter = 0;
-	while (iter < num)
-	{
-		pthread_mutex_init(&fork[iter], NULL);
-		iter++;
-	}
+	return (1);
 }
