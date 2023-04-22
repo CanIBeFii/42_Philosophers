@@ -3,54 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:38:18 by fialexan          #+#    #+#             */
-/*   Updated: 2023/04/17 19:11:56 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:06:40 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
-int	parse_input(int argc, char **argv)
+t_info	*parse_input(int argc, char **argv)
 {
 	t_info	*info;
 
 	if (argc < 5 || argc > 6)
-		return (handle_error(WRONG_NUM_ARGS, -1));
-	info = init_info(argc, argv);
-	if (info == NULL)
-		return (handle_error(WRONG_ARGS, -1));
-	
-	return (0);
-}
-
-t_info	*init_info(int argc, char **argv)
-{
-	t_info	*info;
-
-	info = malloc(sizeof(t_info));
-	if (info == NULL)
-		return (NULL);
-	info->total_philos = ft_atoi(argv[1], 0);
-	info->time_to_die = ft_atoi(argv[2], 0);
-	info->time_to_eat = ft_atoi(argv[3], 0);
-	info->time_to_sleep = ft_atoi(argv[4], 0);
-	if (argc == 6)
-		info->max_number_of_meals = ft_atoi(argv[5], 0);
-	else
-		info->max_number_of_meals = -2;
-	if (info->total_philos < 1 || info->time_to_die < 1 || info->time_to_eat < 1
-		|| info->time_to_sleep < 1 || info->max_number_of_meals < -1)
 	{
-		free(info);
+		handle_error(WRONG_NUM_ARGS, -1);
 		return (NULL);
 	}
-	
+	info = init_info(argc, argv);
+	if (info == NULL)
+	{
+		handle_error(WRONG_ARGS, -1);
+		return (NULL);
+	}
+	info = init_forks(info);
+	if (info == NULL)
+	{
+		free_info(info);
+		handle_error(FORKS_INITIALIZATION, -1);
+		return (NULL);
+	}
 	return (info);
 }
 
-t
 int	ft_atoi(char *str, int i)
 {
 	int	number;
