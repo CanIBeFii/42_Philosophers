@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/04/17 19:14:07 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:25:29 by filipe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,24 @@ typedef struct s_philo
 
 # define WRONG_NUM_ARGS 10
 # define WRONG_ARGS 20
+# define FORKS_INITIALIZATION 30
+# define PHILOS_INITIALIZATION 40
 
 // PARSER.C
 
-int		parse_input(int argc, char **argv);
+t_info	*parse_input(int argc, char **argv);
 
 int		ft_atoi(char *str, int i);
 
 int		check_is_number(char *str);
+
+// INITIALIZATION.C
+
+t_info	*init_info(int argc, char **argv);
+
+t_info	*init_forks(t_info *info);
+
+t_philo	*init_philo(t_info *info);
 
 // ERROR_HANDLING.C
 
