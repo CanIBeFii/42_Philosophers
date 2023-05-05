@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   util_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 17:30:33 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/05 12:43:23 by fialexan         ###   ########.fr       */
+/*   Created: 2023/04/18 17:16:26 by fialexan          #+#    #+#             */
+/*   Updated: 2023/05/05 14:23:52 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(char *str)
 {
-	t_info	*info;
-	t_philo	*philos;
-
-	info = parse_input(argc, argv);
-	if (info == NULL)
-		return (1);
-	philos = init_philos(info);
-	if (philos == NULL)
+	int	number;
+	int	signal;
+	
+	signal = 1;
+	if (str[0] == '-')
+		signal = -1;
+	number = 0;
+	while (*str != '\0' && (*str >= '0' && *str <= '9'))
 	{
-		free_info(info);
-		return (1);
+		number = number * 10 + (*str -'0');
+		str++;
 	}
-	return (0);
+	return (signal * number);
 }

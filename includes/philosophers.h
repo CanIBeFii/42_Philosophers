@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipe <filipe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/04/22 20:25:29 by filipe           ###   ########.fr       */
+/*   Updated: 2023/05/05 14:23:58 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,13 @@ typedef struct s_philo
 
 t_info	*parse_input(int argc, char **argv);
 
-int		ft_atoi(char *str, int i);
-
-int		check_is_number(char *str);
-
 // INITIALIZATION.C
 
 t_info	*init_info(int argc, char **argv);
 
 t_info	*init_forks(t_info *info);
 
-t_philo	*init_philo(t_info *info);
+t_philo	*init_philos(t_info *info);
 
 // ERROR_HANDLING.C
 
@@ -77,5 +73,11 @@ int		handle_error(int error_code, int return_value);
 // FREE.C
 
 void	free_info(t_info *info);
+
+// UTIL_FUNCTIONS.C
+
+int		ft_atoi(char *str);
+
+int		check_is_number(char *str);
 
 #endif
