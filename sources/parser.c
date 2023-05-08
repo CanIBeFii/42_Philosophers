@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:38:18 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/05 12:28:13 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:26:34 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_info	*parse_input(int argc, char **argv)
 {
 	t_info	*info;
-	
+
 	if (argc < 5 || argc > 6)
 	{
 		handle_error(WRONG_NUM_ARGS, -1);

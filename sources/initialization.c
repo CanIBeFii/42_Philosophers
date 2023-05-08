@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:04:00 by filipe            #+#    #+#             */
-/*   Updated: 2023/05/05 14:24:19 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:28:29 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_info	*init_info(int argc, char **argv)
 t_philo	*init_philos(t_info *info)
 {
 	t_philo	*philos;
-	int			iter;
+	int		iter;
 
 	iter = 0;
 	philos = malloc(sizeof(t_philo) * (info->total_philos + 1));
@@ -71,7 +71,6 @@ t_philo	*init_philos(t_info *info)
 		handle_error(PHILOS_INITIALIZATION, -1);
 		return (NULL);
 	}
-		return (NULL);
 	while (iter < info->total_philos)
 	{
 		philos[iter].id = iter + 1;
