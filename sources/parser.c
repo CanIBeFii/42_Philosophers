@@ -6,32 +6,28 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:38:18 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/08 11:26:34 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:42:09 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-t_info	*parse_input(int argc, char **argv)
+int	parse_input(t_info *info, int argc, char **argv)
 {
-	t_info	*info;
-
 	if (argc < 5 || argc > 6)
 	{
 		handle_error(WRONG_NUM_ARGS, -1);
-		return (NULL);
+		return (0);
 	}
-	info = init_info(argc, argv);
-	if (info == NULL)
+	if (init_info(info, argc, argv) == 0)
 	{
 		handle_error(WRONG_ARGS, -1);
-		return (NULL);
+		return (0);
 	}
-	info = init_forks(info);
-	if (info == NULL)
+	if (init_forks(info) == 0)
 	{
 		handle_error(FORKS_INITIALIZATION, -1);
-		return (NULL);
+		return (0);
 	}
-	return (info);
+	return (1);
 }

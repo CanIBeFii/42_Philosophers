@@ -6,13 +6,13 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:04:00 by filipe            #+#    #+#             */
-/*   Updated: 2023/05/08 11:28:29 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:39:43 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-t_info	*init_forks(t_info *info)
+int	init_forks(t_info *info)
 {
 	int	iter;
 
@@ -23,7 +23,7 @@ t_info	*init_forks(t_info *info)
 	if (info->death == NULL || info->message == NULL || info->forks == NULL)
 	{
 		free_info(info);
-		return (NULL);
+		return (0);
 	}
 	pthread_mutex_init(info->message, NULL);
 	pthread_mutex_init(info->death, NULL);
@@ -32,31 +32,24 @@ t_info	*init_forks(t_info *info)
 		pthread_mutex_init(&info->forks[iter], NULL);
 		iter++;
 	}
-	return (info);
+	return (1);
 }
 
-t_info	*init_info(int argc, char **argv)
+int	init_info(t_info *info, int argc, char **argv)
 {
-	t_info	*info;
-
-	info = malloc(sizeof(t_info));
-	if (info == NULL)
-		return (NULL);
 	info->total_philos = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
+	info->philo_died = 0;
 	if (argc == 6)
 		info->max_number_of_meals = ft_atoi(argv[5]);
 	else
 		info->max_number_of_meals = -2;
 	if (info->total_philos < 1 || info->time_to_die < 1 || info->time_to_eat < 1
 		|| info->time_to_sleep < 1 || info->max_number_of_meals == -1)
-	{
-		free(info);
-		return (NULL);
-	}	
-	return (info);
+		return (0);
+	return (1);
 }
 
 t_philo	*init_philos(t_info *info)
@@ -65,7 +58,7 @@ t_philo	*init_philos(t_info *info)
 	int		iter;
 
 	iter = 0;
-	philos = malloc(sizeof(t_philo) * (info->total_philos + 1));
+	philos = malloc(sizeof(t_philo) * (info->total_philos));
 	if (philos == NULL)
 	{
 		handle_error(PHILOS_INITIALIZATION, -1);

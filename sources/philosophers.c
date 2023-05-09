@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:30:33 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/08 12:20:09 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:48:10 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 int	main(int argc, char **argv)
 {
-	t_info	*info;
+	t_info	info;
 	t_philo	*philos;
 
-	info = parse_input(argc, argv);
-	if (info == NULL)
-		return (1);
-	philos = init_philos(info);
-	if (philos == NULL)
+	if (parse_input(&info, argc, argv) == 0)
 	{
-		free_info(info);
 		return (1);
 	}
-	start_dinner(info, philos);
+	philos = init_philos(&info);
+	if (philos == NULL)
+	{
+		free_info(&info);
+		return (1);
+	}
+	start_dinner(&info, philos);
+	free_info(&info);
+	free(philos);
 	return (0);
 }
 
@@ -38,6 +41,12 @@ void	start_dinner(t_info *info, t_philo *philos)
 	while (iter < info->total_philos)
 	{
 		pthread_create(&philos[iter].thread, NULL, &dinner, &philos[iter]);
+		iter++;
+	}
+	iter = 0;
+	while (iter < info->total_philos)
+	{
+		pthread_join(philos[iter].thread, NULL);
 		iter++;
 	}
 }

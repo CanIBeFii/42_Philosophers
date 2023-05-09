@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/08 12:16:10 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:54:10 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_info
 	t_mutex	*message;
 	t_mutex	*forks;
 	t_mutex	*death;
+	int		philo_died;
 }	t_info;
 
 typedef struct s_philo
@@ -62,13 +63,13 @@ void		start_dinner(t_info *info, t_philo *philos);
 
 // PARSER.C
 
-t_info		*parse_input(int argc, char **argv);
+int			parse_input(t_info *info, int argc, char **argv);
 
 // INITIALIZATION.C
 
-t_info		*init_info(int argc, char **argv);
+int			init_info(t_info *info, int argc, char **argv);
 
-t_info		*init_forks(t_info *info);
+int			init_forks(t_info *info);
 
 t_philo		*init_philos(t_info *info);
 
@@ -89,5 +90,19 @@ int			ft_atoi(char *str);
 long long	get_time(void);
 
 long long	time_diff(long long time);
+
+// DINNER.C
+
+void		*dinner(void *args);
+
+// DINNER_ACTIONS.C
+
+void		philo_eat(t_philo *philo);
+
+void		philo_sleep(t_philo *philo);
+
+void		philo_think(t_philo *philo);
+
+void		philo_take_forks(t_philo *philo);
 
 #endif
