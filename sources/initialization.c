@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:04:00 by filipe            #+#    #+#             */
-/*   Updated: 2023/05/09 15:39:43 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:04:31 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,26 @@ int	init_info(t_info *info, int argc, char **argv)
 	return (1);
 }
 
-t_philo	*init_philos(t_info *info)
+t_philo	*init_philos(t_info info)
 {
 	t_philo	*philos;
 	int		iter;
 
 	iter = 0;
-	philos = malloc(sizeof(t_philo) * (info->total_philos));
+	philos = malloc(sizeof(t_philo) * (info.total_philos));
 	if (philos == NULL)
 	{
 		handle_error(PHILOS_INITIALIZATION, -1);
 		return (NULL);
 	}
-	while (iter < info->total_philos)
+	while (iter < info.total_philos)
 	{
 		philos[iter].id = iter + 1;
-		philos[iter].left_fork = &info->forks[iter];
-		philos[iter].right_fork = &info->forks[(iter + 1) % info->total_philos];
-		philos[iter].num_of_meals = info->max_number_of_meals;
+		philos[iter].left_fork = &info.forks[iter];
+		philos[iter].right_fork = &info.forks[(iter + 1) % info.total_philos];
+		philos[iter].num_of_meals = info.max_number_of_meals;
 		philos[iter].last_meal = 0;
 		philos[iter].start_time = 0;
-		philos[iter].info = info;
 		iter++;
 	}
 	return (philos);
