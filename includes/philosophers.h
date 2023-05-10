@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/09 15:54:10 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:10:31 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_philo
 
 // PHILOSOPHERS.C
 
-void		start_dinner(t_info *info, t_philo *philos);
+void		start_dinner(t_info info, t_philo *philos);
 
 // PARSER.C
 
@@ -71,7 +71,7 @@ int			init_info(t_info *info, int argc, char **argv);
 
 int			init_forks(t_info *info);
 
-t_philo		*init_philos(t_info *info);
+t_philo		*init_philos(t_info info);
 
 // ERROR_HANDLING.C
 
@@ -95,14 +95,18 @@ long long	time_diff(long long time);
 
 void		*dinner(void *args);
 
+void		*one_philo(void *args);
+
+int			check_end_dinner(t_philo *philo);
+
 // DINNER_ACTIONS.C
 
-void		philo_eat(t_philo *philo);
+int			philo_eat(t_philo *philo);
 
-void		philo_sleep(t_philo *philo);
+int			philo_sleep(t_philo *philo);
 
-void		philo_think(t_philo *philo);
+int			philo_think(t_philo *philo);
 
-void		philo_take_forks(t_philo *philo);
+int			philo_take_forks(t_philo *philo);
 
 #endif
