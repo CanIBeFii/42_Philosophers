@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:44:39 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/09 16:03:08 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:29:03 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,53 @@
 void	*dinner(void *args)
 {
 	t_philo		*philo;
-	long long	time;
-	// int			iter;
 
 	philo = (t_philo *)args;
-	time = get_time();
-	philo->last_meal = time;
-	philo->start_time = time;
-	philo_eat(philo);
-	philo_sleep(philo);
-	philo_think(philo);
+	if (philo->id % 2 == 0)
+		usleep(150);
+	while (philo->info->philo_died == 0)
+	{
+		if (philo_eat(philo) == 0)
+			return (NULL);
+		if (philo_sleep(philo) == 0)
+			return (NULL);
+		if (philo_think(philo) == 0)
+			return (NULL);
+	}
 	return (NULL);
 }
+
+void	*one_philo(void *args)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)args;
+	philo->start_time = get_time();
+	philo->last_meal = philo->start_time;
+	philo_think(philo);
+	while (check_end_dinner(philo) == 0)
+		;
+	return (NULL);
+}
+
+int	check_end_dinner(t_philo *philo)
+{
+	pthread_mutex_lock(philo->info->death);
+	if (philo->info->philo_died == 1)
+	{
+		pthread_mutex_unlock(philo->info->death);
+		return (1);
+	}
+	if (time_diff(philo->last_meal) >= philo->info->time_to_die)
+	{
+		pthread_mutex_lock(philo->info->message);
+		printf("[%lld] %d died\n", time_diff(philo->start_time), philo->id);
+		pthread_mutex_unlock(philo->info->message);
+		philo->info->philo_died = 1;
+		pthread_mutex_unlock(philo->info->death);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->info->death);
+	return (0);
+}
+
