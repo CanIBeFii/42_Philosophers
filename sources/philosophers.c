@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:30:33 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/10 16:34:31 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:05:29 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,17 @@ void	start_dinner(t_info info, t_philo *philos)
 	long long	time;
 
 	iter = -1;
-	if (info.total_philos == 1)
+	time = get_time();
+	while (++iter < info.total_philos)
 	{
-		philos[0].info = &info;
-		pthread_create(&philos[0].thread, NULL, &one_philo, &philos[0]);
-	}
-	else
-	{
-		time = get_time();
-		while (++iter < info.total_philos)
-		{
-			philos[iter].start_time = time;
-			philos[iter].last_meal = time;
-			philos[iter].info = &info;
-			pthread_create(&philos[iter].thread, NULL, &dinner, &philos[iter]);
-		}
+		philos[iter].start_time = time;
+		philos[iter].last_meal = time;
+		philos[iter].info = &info;
+		philos[iter].l_fork_state = &info.is_fork_used[iter];
+		philos[iter].r_fork_state
+			= &info.is_fork_used[iter % philos[iter].info->total_philos];
+		pthread_create(&philos[iter].thread, NULL, &distribute_dinner,
+			&philos[iter]);
 	}
 	iter = -1;
 	while (++iter < info.total_philos)

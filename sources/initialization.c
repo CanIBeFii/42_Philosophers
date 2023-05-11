@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:04:00 by filipe            #+#    #+#             */
-/*   Updated: 2023/05/10 15:04:31 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:25:05 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	init_forks(t_info *info)
 
 int	init_info(t_info *info, int argc, char **argv)
 {
+	int	iter;
+
 	info->total_philos = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
@@ -49,6 +51,10 @@ int	init_info(t_info *info, int argc, char **argv)
 	if (info->total_philos < 1 || info->time_to_die < 1 || info->time_to_eat < 1
 		|| info->time_to_sleep < 1 || info->max_number_of_meals == -1)
 		return (0);
+	info->is_fork_used = malloc(sizeof(int) * info->total_philos);
+	iter = -1;
+	while (++iter < info->total_philos)
+		info->is_fork_used[iter] = 0;
 	return (1);
 }
 
