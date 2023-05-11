@@ -5,7 +5,7 @@ HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_LIST = philosophers.c parser.c util_functions.c free.c error.c initialization.c \
-				time.c dinner.c dinner_actions.c
+				time.c dinner.c dinner_actions.c message.c
 SOURCES_DIRECTORY = ./sources/
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
