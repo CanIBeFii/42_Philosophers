@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:41:40 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/11 13:04:39 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:50:55 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	print_message(t_philo *philo, int message_code)
 {
-	long long	time;
-
 	pthread_mutex_lock(philo->info->message);
 	if (message_code == SLEEP_CODE)
 		printf("[%lld] %d is sleeping\n", time_diff(philo->start_time),
@@ -27,7 +25,7 @@ void	print_message(t_philo *philo, int message_code)
 		printf("[%lld] %d is thinking\n", time_diff(philo->start_time),
 			philo->id);
 	else if (message_code == DEATH_CODE)
-		printf("[%lld] %d is thinking\n", time_diff(philo->start_time),
+		printf("[%lld] %d died\n", time_diff(philo->start_time),
 			philo->id);
 	else if (message_code == FORK_CODE)
 	{
