@@ -59,8 +59,8 @@ fclean: clean ## Deep cleans
 	@$(ECHO) "$(CYAN)$(NAME): $(RED)$(NAME) $(RESET)was deleted"
 
 re: ## Recompiles the project from scratch
-	@make fclean
-	@make all
+	@make -s fclean
+	@make -s all
 
 help:  ## show this help
 	@echo "usage: make [target]"
