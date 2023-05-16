@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:12:05 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/09 15:47:58 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:54:40 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void	free_info(t_info *info)
 		pthread_mutex_destroy(info->death);
 		free(info->death);
 	}
+	if (info->is_fork_used != NULL)
+		free(info->is_fork_used);
 }
