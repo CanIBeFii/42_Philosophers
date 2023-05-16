@@ -26,11 +26,15 @@ BLUE = \033[0;94m
 YELLOW = \033[0;93m
 RESET = \033[0m
 
-ifeq ($TERM, 'xterm-256color')
-	ECHO = echo -e
-else
+# ECHO
+
+ifeq "$(TERM)" "xterm-256color"
 	ECHO = echo
+else
+	ECHO = echo -e
 endif
+
+# RULES
 
 all: 
 	@make -s $(NAME)
