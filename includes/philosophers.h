@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/11 15:55:33 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:01:52 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct s_info
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		max_number_of_meals;
-	int		*is_fork_used;
+	int		all_eaten;
+	t_mutex	*eat;
 	t_mutex	*message;
 	t_mutex	*forks;
+	t_mutex	*time;
 	t_mutex	*death;
 	int		philo_died;
 }	t_info;
@@ -45,8 +47,8 @@ typedef struct s_philo
 	t_thread	thread;
 	t_mutex		*left_fork;
 	t_mutex		*right_fork;
-	int			*l_fork_state;
-	int			*r_fork_state;
+	t_mutex		*time;
+	t_mutex		*eat;
 	int			num_of_meals;
 	long long	last_meal;
 	long long	start_time;
@@ -65,6 +67,12 @@ typedef struct s_philo
 # define THINK_CODE 31
 # define DEATH_CODE 41
 # define FORK_CODE 51
+
+# define FORK_TAKEN "has taken a fork\n"
+# define EATING "is eating\n"
+# define SLEEPING "is sleeping\n"
+# define THINKING "is thinking\n"
+# define DIED "died\n"
 
 // PHILOSOPHERS.C
 
