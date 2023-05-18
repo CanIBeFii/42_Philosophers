@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:44:39 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/11 15:55:59 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:04:16 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,14 @@ void	*distribute_dinner(void *args)
 
 int	check_end_dinner(t_philo *philo)
 {
+	int	finnish_eating;
+	int	someone_died;
+	
+	pthread_mutex_lock(philo->info->eat);
+	finnish_eating = philo->info->all_eaten;
+	pthread_mutex_unlock(philo->info->eat);
 	pthread_mutex_lock(philo->info->death);
-	if (philo->info->philo_died == 1 || philo->num_of_meals == 0)
-	{
-		pthread_mutex_unlock(philo->info->death);
-		return (1);
-	}
-	if (time_diff(philo->last_meal) >= philo->info->time_to_die)
-	{
-		print_message(philo, DEATH_CODE);
-		philo->info->philo_died = 1;
-		pthread_mutex_unlock(philo->info->death);
-		return (1);
-	}
+	someone_died = philo->info->philo_died;
 	pthread_mutex_unlock(philo->info->death);
-	return (0);
-}
-
-int	forks_are_free(t_philo *philo)
-{
-	return (*philo->l_fork_state == 0 && *philo->r_fork_state == 0);
+	return (finnish_eating == 1 || someone_died == 1);
 }
