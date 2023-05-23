@@ -6,7 +6,7 @@
 /*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:46:28 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/18 17:26:27 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/22 16:41:41 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,15 @@ void	*big_brother_death(void *args)
 			if (time_diff(philos[iter].last_meal) >= philos->info->time_to_die)
 			{
 				pthread_mutex_unlock(philos[iter].time);
-				
-			}	
+				kill_philo(&philos[iter]);
+				print_message(&philos[iter], DIED);
+				return (NULL);
+			}
+			pthread_mutex_unlock(philos[iter].time);
+			iter++;
 		}
 	}
+	return (NULL);
 }
 
 void	kill_philo(t_philo *philo)
