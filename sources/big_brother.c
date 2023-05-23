@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_brother.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:46:28 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/22 16:41:41 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 18:25:51 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*big_brother_eat(void *args)
 {
 	t_philo	*philos;
-	
+
 	philos = (t_philo *)args;
 	while (check_end_dinner(philos) == 0)
 	{
@@ -29,7 +29,7 @@ int	philos_finnish_eating(t_philo *philos)
 {
 	int	iter;
 	int	total_philos;
-	
+
 	iter = 0;
 	total_philos = philos->info->total_philos;
 	while (iter < total_philos)
@@ -53,7 +53,7 @@ void	*big_brother_death(void *args)
 {
 	t_philo	*philos;
 	int		iter;
-	
+
 	philos = (t_philo *)args;
 	while (check_end_dinner(philos) == 0)
 	{
