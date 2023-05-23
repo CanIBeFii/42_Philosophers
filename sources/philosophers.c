@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:30:33 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/11 15:05:29 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:21:49 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,28 @@ void	start_dinner(t_info info, t_philo *philos)
 	long long	time;
 
 	iter = -1;
-	time = get_time();
 	while (++iter < info.total_philos)
 	{
+		time = get_time();
 		philos[iter].start_time = time;
 		philos[iter].last_meal = time;
 		philos[iter].info = &info;
-		philos[iter].l_fork_state = &info.is_fork_used[iter];
-		philos[iter].r_fork_state
-			= &info.is_fork_used[iter % philos[iter].info->total_philos];
 		pthread_create(&philos[iter].thread, NULL, &distribute_dinner,
 			&philos[iter]);
 	}
+	start_big_brother(philos);
 	iter = -1;
 	while (++iter < info.total_philos)
 		pthread_join(philos[iter].thread, NULL);
+}
+
+void	start_big_brother(t_philo *philos)
+{
+	t_thread	death_big_brother;
+	t_thread	eat_big_brother;
+	
+	pthread_create(&death_big_brother, NULL, &big_brother_death, philos);
+	pthread_detach(death_big_brother);
+	pthread_create(&eat_big_brother, NULL, &big_brother_eat, philos);
+	pthread_detach(eat_big_brother);
 }
