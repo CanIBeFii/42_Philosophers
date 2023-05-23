@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:30:28 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/23 15:05:44 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 18:28:00 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	philo_eat(t_philo *philo)
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(philo->time);
 	sleep_checker(philo, philo->info->time_to_eat);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 	return (1);
 }
 
@@ -66,8 +68,7 @@ int	philo_take_forks(t_philo *philo)
 void	sleep_checker(t_philo *philo, int total_sleep_time)
 {
 	long long	begin_time;
-	
-	total_sleep_time *= 1000;
+
 	begin_time = get_time();
 	while (check_end_dinner(philo) == 0)
 	{

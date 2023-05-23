@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:44:39 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/23 15:38:49 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 18:25:37 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ void	*dinner(void *args)
 	philo = (t_philo *)args;
 	if (philo->id % 2 == 0)
 		usleep(150);
-	while (check_end_dinner(philo))
+	while (check_end_dinner(philo) == 0)
 	{
 		if (philo_take_forks(philo) == 0)
 			return (NULL);
 		if (philo_eat(philo) == 0)
 			return (NULL);
-		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->right_fork);
 		if (philo_sleep(philo) == 0)
 			return (NULL);
 		if (philo_think(philo) == 0)
@@ -61,6 +59,7 @@ void	*distribute_dinner(void *args)
 	else
 	{
 		dinner(philo);
+		printf("came here\n\n");
 		return (NULL);
 	}
 }
@@ -69,10 +68,10 @@ int	check_end_dinner(t_philo *philo)
 {
 	int	finnish_eating;
 	int	someone_died;
-	
-	pthread_mutex_lock(philo->info->eat);
+
+	pthread_mutex_lock(philo->eat);
 	finnish_eating = philo->info->all_eaten;
-	pthread_mutex_unlock(philo->info->eat);
+	pthread_mutex_unlock(philo->eat);
 	pthread_mutex_lock(philo->info->death);
 	someone_died = philo->info->philo_died;
 	pthread_mutex_unlock(philo->info->death);

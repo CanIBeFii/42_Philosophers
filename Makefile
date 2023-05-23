@@ -14,7 +14,7 @@ OBJECTS_DIRECTORY = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=thread
+FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 INCLUDES = -I $(HEADERS_DIRECTORY) 
 
 # COLORS
