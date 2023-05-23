@@ -6,7 +6,7 @@
 /*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:30:28 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/18 16:38:09 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 15:05:44 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	philo_eat(t_philo *philo)
 {
 	if (check_end_dinner(philo) == 1)
 		return (0);
-	print_message(philo, EAT_CODE);
+	print_message(philo, EATING);
 	pthread_mutex_lock(philo->info->eat);
 	if (philo->num_of_meals > 0)
 		philo->num_of_meals--;
@@ -32,7 +32,7 @@ int	philo_sleep(t_philo *philo)
 {
 	if (check_end_dinner(philo) == 1)
 		return (0);
-	print_message(philo, SLEEP_CODE);
+	print_message(philo, SLEEPING);
 	sleep_checker(philo, philo->info->time_to_sleep);
 	return (1);
 }
@@ -41,7 +41,7 @@ int	philo_think(t_philo *philo)
 {
 	if (check_end_dinner(philo) == 1)
 		return (0);
-	print_message(philo, THINK_CODE);
+	print_message(philo, THINKING);
 	return (1);
 }
 
@@ -59,8 +59,6 @@ int	philo_take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		pthread_mutex_lock(philo->left_fork);
 	}
-	if (check_end_dinner(philo) == 1)
-		return (0);
 	print_message(philo, FORK_TAKEN);
 	return (1);
 }
