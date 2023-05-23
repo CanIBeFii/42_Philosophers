@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:12:05 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/16 11:54:40 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:57:50 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	free_info(t_info *info)
 		pthread_mutex_destroy(info->death);
 		free(info->death);
 	}
-	if (info->is_fork_used != NULL)
-		free(info->is_fork_used);
+	if (info->time != NULL)
+	{
+		pthread_mutex_destroy(info->time);
+		free(info->time);
+	}
+	if (info->eat != NULL)
+	{
+		pthread_mutex_destroy(info->eat);
+		free(info->eat);
+	}
 }
