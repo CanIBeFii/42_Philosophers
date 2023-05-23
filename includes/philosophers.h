@@ -6,7 +6,7 @@
 /*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/18 17:01:52 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 15:18:41 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,6 @@ typedef struct s_philo
 # define FORKS_INITIALIZATION 30
 # define PHILOS_INITIALIZATION 40
 
-# define SLEEP_CODE 11
-# define EAT_CODE 21
-# define THINK_CODE 31
-# define DEATH_CODE 41
-# define FORK_CODE 51
-
 # define FORK_TAKEN "has taken a fork\n"
 # define EATING "is eating\n"
 # define SLEEPING "is sleeping\n"
@@ -77,6 +71,8 @@ typedef struct s_philo
 // PHILOSOPHERS.C
 
 void		start_dinner(t_info info, t_philo *philos);
+
+void		start_big_brother(t_philo *philos);
 
 // PARSER.C
 
@@ -101,6 +97,8 @@ void		free_info(t_info *info);
 // UTIL_FUNCTIONS.C
 
 int			ft_atoi(char *str);
+
+int			ft_strcmp(const char *s1, const char *s2);
 
 // TIME.C
 
@@ -130,10 +128,20 @@ int			philo_think(t_philo *philo);
 
 int			philo_take_forks(t_philo *philo);
 
-void		lock_forks(t_philo *philo);
+void		sleep_checker(t_philo *philo, int total_sleep_time);
 
 // MESSSAGE.C
 
-void		print_message(t_philo *philo, int message_code);
+void		print_message(t_philo *philo, char *str);
+
+// BIG_BROTHER.C
+
+void		*big_brother_eat(void *args);
+
+int			philos_finnish_eating(t_philo *philos);
+
+void		*big_brother_death(void *args);
+
+void		kill_philo(t_philo *philo);
 
 #endif
