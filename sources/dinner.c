@@ -6,7 +6,7 @@
 /*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:44:39 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/18 16:04:16 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 15:38:49 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void	*dinner(void *args)
 	philo = (t_philo *)args;
 	if (philo->id % 2 == 0)
 		usleep(150);
-	while (philo->info->philo_died == 0)
+	while (check_end_dinner(philo))
 	{
 		if (philo_take_forks(philo) == 0)
 			return (NULL);
 		if (philo_eat(philo) == 0)
 			return (NULL);
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
 		if (philo_sleep(philo) == 0)
 			return (NULL);
 		if (philo_think(philo) == 0)
