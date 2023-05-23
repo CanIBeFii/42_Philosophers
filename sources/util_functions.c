@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:16:26 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/08 11:28:56 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:17:13 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,18 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	return (signal * number);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t			i;
+	unsigned char	*un_s1;
+	unsigned char	*un_s2;
+
+	un_s1 = (unsigned char *)s1;
+	un_s2 = (unsigned char *)s2;
+	i = 0;
+	while (un_s1[i] != '\0' && un_s2[i] != '\0' && un_s1[i] == un_s2[i])
+				i++;
+	return (un_s1[i] - un_s2[i]);
 }
