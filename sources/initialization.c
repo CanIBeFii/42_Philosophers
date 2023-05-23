@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:04:00 by filipe            #+#    #+#             */
-/*   Updated: 2023/05/23 15:04:33 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 18:26:00 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	init_info(t_info *info, int argc, char **argv)
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->philo_died = 0;
+	info->all_eaten = 0;
 	if (argc == 6)
 		info->max_number_of_meals = ft_atoi(argv[5]);
 	else

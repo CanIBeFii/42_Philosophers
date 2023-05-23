@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:30:33 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/23 15:21:49 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/23 18:26:48 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ void	start_big_brother(t_philo *philos)
 {
 	t_thread	death_big_brother;
 	t_thread	eat_big_brother;
-	
+
 	pthread_create(&death_big_brother, NULL, &big_brother_death, philos);
 	pthread_detach(death_big_brother);
-	pthread_create(&eat_big_brother, NULL, &big_brother_eat, philos);
-	pthread_detach(eat_big_brother);
+	if (philos->info->max_number_of_meals > 0)
+	{
+		pthread_create(&eat_big_brother, NULL, &big_brother_eat, philos);
+		pthread_detach(eat_big_brother);
+	}
 }
