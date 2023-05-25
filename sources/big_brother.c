@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_brother.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:46:28 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/23 18:25:51 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:05:01 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	philos_finnish_eating(t_philo *philos)
 		pthread_mutex_unlock(philos[iter].eat);
 		iter++;
 	}
-	pthread_mutex_lock(philos->info->eat);
+	pthread_mutex_lock(philos->info->death);
 	philos->info->all_eaten = 1;
-	pthread_mutex_unlock(philos->info->eat);
+	pthread_mutex_unlock(philos->info->death);
 	return (1);
 }
 

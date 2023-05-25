@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:44:39 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/23 18:25:37 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:06:16 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	*distribute_dinner(void *args)
 	else
 	{
 		dinner(philo);
-		printf("came here\n\n");
 		return (NULL);
 	}
 }
@@ -69,10 +68,8 @@ int	check_end_dinner(t_philo *philo)
 	int	finnish_eating;
 	int	someone_died;
 
-	pthread_mutex_lock(philo->eat);
-	finnish_eating = philo->info->all_eaten;
-	pthread_mutex_unlock(philo->eat);
 	pthread_mutex_lock(philo->info->death);
+	finnish_eating = philo->info->all_eaten;
 	someone_died = philo->info->philo_died;
 	pthread_mutex_unlock(philo->info->death);
 	return (finnish_eating == 1 || someone_died == 1);

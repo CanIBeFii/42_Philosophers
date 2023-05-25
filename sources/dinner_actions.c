@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:30:28 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/23 18:28:00 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:07:45 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	philo_eat(t_philo *philo)
 	if (check_end_dinner(philo) == 1)
 		return (0);
 	print_message(philo, EATING);
-	pthread_mutex_lock(philo->info->eat);
+	pthread_mutex_lock(philo->eat);
 	if (philo->num_of_meals > 0)
 		philo->num_of_meals--;
-	pthread_mutex_unlock(philo->info->eat);
+	pthread_mutex_unlock(philo->eat);
 	pthread_mutex_lock(philo->time);
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(philo->time);
