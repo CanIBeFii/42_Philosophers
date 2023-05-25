@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 11:44:39 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/24 17:06:16 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/25 16:51:06 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ void	*dinner(void *args)
 		usleep(150);
 	while (check_end_dinner(philo) == 0)
 	{
-		if (philo_take_forks(philo) == 0)
-			return (NULL);
-		if (philo_eat(philo) == 0)
-			return (NULL);
-		if (philo_sleep(philo) == 0)
-			return (NULL);
-		if (philo_think(philo) == 0)
-			return (NULL);
+		philo_take_forks(philo);
+		philo_eat(philo);
+		pthread_mutex_unlock(philo->left_fork);
+		usleep(150);
+		pthread_mutex_unlock(philo->right_fork);
+		philo_sleep(philo);
+		philo_think(philo);
 	}
 	return (NULL);
 }

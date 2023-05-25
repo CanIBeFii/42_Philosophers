@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 20:04:00 by filipe            #+#    #+#             */
-/*   Updated: 2023/05/23 18:26:00 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:30:06 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	init_forks(t_info *info)
 	info->message = malloc(sizeof(t_mutex));
 	info->death = malloc(sizeof(t_mutex));
 	info->forks = malloc(sizeof(t_mutex) * info->total_philos);
-	info->eat = malloc(sizeof(t_mutex) * info->total_philos);
-	info->time = malloc(sizeof(t_mutex) * info->total_philos);
+	info->eat = malloc(sizeof(t_mutex));
+	info->time = malloc(sizeof(t_mutex));
 	if (info->death == NULL || info->message == NULL || info->forks == NULL
 		|| info->eat == NULL || info->time == NULL)
 	{
@@ -30,11 +30,11 @@ int	init_forks(t_info *info)
 	}
 	pthread_mutex_init(info->message, NULL);
 	pthread_mutex_init(info->death, NULL);
+	pthread_mutex_init(info->eat, NULL);
+	pthread_mutex_init(info->time, NULL);
 	while (iter < info->total_philos)
 	{
 		pthread_mutex_init(&info->forks[iter], NULL);
-		pthread_mutex_init(&info->eat[iter], NULL);
-		pthread_mutex_init(&info->time[iter], NULL);
 		iter++;
 	}
 	return (1);

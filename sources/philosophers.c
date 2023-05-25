@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:30:33 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/23 18:26:48 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:31:47 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	start_dinner(t_info info, t_philo *philos)
 		time = get_time();
 		philos[iter].start_time = time;
 		philos[iter].last_meal = time;
+		philos[iter].eat = info.eat;
+		philos[iter].time = info.time;
 		philos[iter].info = &info;
 		pthread_create(&philos[iter].thread, NULL, &distribute_dinner,
 			&philos[iter]);
