@@ -13,8 +13,8 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
 OBJECTS_DIRECTORY = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
-CC = gcc
-FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=thread
+CC = cc
+FLAGS = -Wall -Werror -Wextra -g3 -pthread #-fsanitize=thread
 INCLUDES = -I $(HEADERS_DIRECTORY) 
 
 # COLORS

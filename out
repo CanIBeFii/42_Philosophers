@@ -1,0 +1,36 @@
+0 1 has taken a fork
+1 1 has taken a fork
+1 1 is eating
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+201 1 is sleeping
+199 5 has taken a fork
+199 5 has taken a fork
+199 5 is eating
+200 3 is sleeping
+201 2 has taken a fork
+201 2 has taken a fork
+201 2 is eating
+399 5 is sleeping
+400 4 has taken a fork
+400 4 has taken a fork
+400 4 is eating
+401 1 is thinking
+401 1 has taken a fork
+401 1 has taken a fork
+401 1 is eating
+401 2 is sleeping
+400 3 is thinking
+601 1 is sleeping
+601 2 is thinking
+601 2 has taken a fork
+601 2 has taken a fork
+601 2 is eating
+600 4 is sleeping
+599 5 is thinking
+599 5 has taken a fork
+599 5 has taken a fork
+599 5 is eating
+time to die 800 time diff 800
+800 3 died

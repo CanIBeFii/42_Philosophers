@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:33:37 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/24 17:08:50 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/25 16:00:51 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ typedef struct s_philo
 # define FORKS_INITIALIZATION 30
 # define PHILOS_INITIALIZATION 40
 
-# define FORK_TAKEN "has taken a fork"
-# define EATING "is eating"
-# define SLEEPING "is sleeping"
-# define THINKING "is thinking"
-# define DIED "died"
+# define FORK_TAKEN "has taken a fork\n"
+# define EATING "is eating\n"
+# define SLEEPING "is sleeping\n"
+# define THINKING "is thinking\n"
+# define DIED "died\n"
 
 // PHILOSOPHERS.C
 
