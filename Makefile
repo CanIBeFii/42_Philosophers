@@ -14,7 +14,7 @@ OBJECTS_DIRECTORY = objects/
 OBJECTS = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=thread
 INCLUDES = -I $(HEADERS_DIRECTORY) 
 
 # COLORS
@@ -40,7 +40,7 @@ all:
 	@make -s $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS)
-	@$(ECHO) "\n\nStarting compile, now have some $(BLUE)colorful $(RED)text $(YELLOW)slayyyy$(RESET)"
+	@$(ECHO) "\nStarting compile, now have some $(BLUE)colorful $(RED)text $(YELLOW)slayyyy$(RESET)"
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $(NAME)
 	@$(ECHO) "$(CYAN)$(NAME):$(RESET) $(GREEN)object files$(RESET) were created and have come to free us, $(YELLOW)monkeys$(RESET) united."
 	@$(ECHO) "$(CYAN)$(NAME):$(RESET) $(GREEN)$(NAME)$(RESET) was created, like $(BLUE)god$(RESET) intended"
