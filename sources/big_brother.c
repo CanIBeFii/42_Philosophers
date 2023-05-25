@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_brother.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:46:28 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/24 17:05:01 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/25 16:26:39 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	*big_brother_death(void *args)
 			{
 				pthread_mutex_unlock(philos[iter].time);
 				kill_philo(&philos[iter]);
-				print_message(&philos[iter], DIED);
 				return (NULL);
 			}
 			pthread_mutex_unlock(philos[iter].time);
@@ -78,7 +77,9 @@ void	*big_brother_death(void *args)
 void	kill_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->info->death);
-	print_message(philo, DIED);
+	pthread_mutex_lock(philo->info->message);
+	printf("%lld %d %s", time_diff(philo->start_time), philo->id, DIED);
+	pthread_mutex_unlock(philo->info->message);
 	philo->info->philo_died = 1;
 	pthread_mutex_unlock(philo->info->death);
 }

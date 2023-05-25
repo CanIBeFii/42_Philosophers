@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:30:28 by fialexan          #+#    #+#             */
-/*   Updated: 2023/05/24 17:07:45 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/25 16:50:54 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	philo_eat(t_philo *philo)
 {
 	if (check_end_dinner(philo) == 1)
 		return (0);
-	print_message(philo, EATING);
+	pthread_mutex_lock(philo->info->message);
+	printf("%lld %d %s", time_diff(philo->start_time), philo->id, EATING);
+	pthread_mutex_unlock(philo->info->message);
 	pthread_mutex_lock(philo->eat);
 	if (philo->num_of_meals > 0)
 		philo->num_of_meals--;
@@ -25,8 +27,6 @@ int	philo_eat(t_philo *philo)
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(philo->time);
 	sleep_checker(philo, philo->info->time_to_eat);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
 	return (1);
 }
 
@@ -34,7 +34,9 @@ int	philo_sleep(t_philo *philo)
 {
 	if (check_end_dinner(philo) == 1)
 		return (0);
-	print_message(philo, SLEEPING);
+	pthread_mutex_lock(philo->info->message);
+	printf("%lld %d %s", time_diff(philo->start_time), philo->id, SLEEPING);
+	pthread_mutex_unlock(philo->info->message);
 	sleep_checker(philo, philo->info->time_to_sleep);
 	return (1);
 }
@@ -43,7 +45,9 @@ int	philo_think(t_philo *philo)
 {
 	if (check_end_dinner(philo) == 1)
 		return (0);
-	print_message(philo, THINKING);
+	pthread_mutex_lock(philo->info->message);
+	printf("%lld %d %s", time_diff(philo->start_time), philo->id, THINKING);
+	pthread_mutex_unlock(philo->info->message);
 	return (1);
 }
 
@@ -53,15 +57,20 @@ int	philo_take_forks(t_philo *philo)
 		return (0);
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->right_fork);
+		pthread_mutex_lock(philo->left_fork);
 	}
 	else
 	{
-		pthread_mutex_lock(philo->right_fork);
 		pthread_mutex_lock(philo->left_fork);
+		pthread_mutex_lock(philo->right_fork);
 	}
-	print_message(philo, FORK_TAKEN);
+	if (check_end_dinner(philo) == 1)
+		return (0);
+	pthread_mutex_lock(philo->info->message);
+	printf("%lld %d %s", time_diff(philo->start_time), philo->id, FORK_TAKEN);
+	printf("%lld %d %s", time_diff(philo->start_time), philo->id, FORK_TAKEN);
+	pthread_mutex_unlock(philo->info->message);
 	return (1);
 }
 
@@ -74,6 +83,6 @@ void	sleep_checker(t_philo *philo, int total_sleep_time)
 	{
 		if (time_diff(begin_time) >= total_sleep_time)
 			break ;
-		usleep(50);
+		usleep(100);
 	}
 }
